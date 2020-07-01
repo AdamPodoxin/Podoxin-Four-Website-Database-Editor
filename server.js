@@ -69,7 +69,7 @@ io.on("connection", (socket) => {
     socket.emit("data sent successfully");
   });
 
-  socket.on("get events json", (data) => {
+  socket.on("get events json", () => {
     var options = {
       host: "",
       path: "/api/events",
@@ -93,6 +93,36 @@ io.on("connection", (socket) => {
 
         returnData.data = JSON.parse(returnData.data);
         socket.emit("return events json", returnData);
+      });
+    };
+
+    http.request(options, callback).end();
+  });
+
+  socket.on("get numImgs", () => {
+    var options = {
+      host: "",
+      path: "/api/numImgs",
+      port: PORT,
+    };
+
+    let callback = (response) => {
+      let strResponse = "";
+
+      response.on("data", (chunk) => {
+        strResponse += chunk;
+      });
+
+      response.on("end", () => {
+        const returnData =
+          strResponse == "[]"
+            ? null
+            : Array.from(JSON.parse(strResponse)).filter(
+                (data) => data.item == "numImgs"
+              )[0];
+
+        returnData.numImgs = parseInt(returnData.numImgs);
+        socket.emit("return numImgs", returnData.numImgs);
       });
     };
 

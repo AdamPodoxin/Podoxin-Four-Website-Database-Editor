@@ -12,6 +12,10 @@ socket.on("return events json", (res) => {
   loadEventsFromJSON(res.data);
 });
 
+socket.on("return numImgs", (res) => {
+  console.log(res);
+});
+
 socket.on("data sent successfully", () => {
   alert("Data sent successfully");
 });
@@ -22,6 +26,7 @@ function onload() {
   jsonInput = document.getElementById("json");
 
   socket.emit("get events json");
+  socket.emit("get numImgs");
 }
 
 function openTab(tabId) {
