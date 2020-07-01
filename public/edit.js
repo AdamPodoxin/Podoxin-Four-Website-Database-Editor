@@ -9,7 +9,7 @@ const eventsTrTemplate =
 let socket = io();
 
 socket.on("return events json", (res) => {
-  loadEventsFromJSON(res.data);
+  loadEventsFromJSON(res);
 });
 
 socket.on("return numImgs", (res) => {

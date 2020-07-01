@@ -5,7 +5,7 @@ const Event = require("../models/EventSchema");
 
 router.get("/", (req, res) => {
   Event.find().then((events) => {
-    res.json(events);
+    res.json(JSON.parse(events[0].data));
   });
 });
 

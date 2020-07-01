@@ -84,14 +84,7 @@ io.on("connection", (socket) => {
       });
 
       response.on("end", () => {
-        const returnData =
-          strResponse == "[]"
-            ? null
-            : Array.from(JSON.parse(strResponse)).filter(
-                (data) => data.item == "events"
-              )[0];
-
-        returnData.data = JSON.parse(returnData.data);
+        const returnData = JSON.parse(strResponse);
         socket.emit("return events json", returnData);
       });
     };
@@ -121,8 +114,7 @@ io.on("connection", (socket) => {
                 (data) => data.item == "numImgs"
               )[0];
 
-        returnData.numImgs = parseInt(returnData.numImgs);
-        socket.emit("return numImgs", returnData.numImgs);
+        socket.emit("return numImgs", parseInt(returnData.numImgs));
       });
     };
 
