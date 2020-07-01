@@ -9,7 +9,7 @@ const cors = require("cors");
 
 const PORT = process.env.PORT || 5000;
 
-const events = require("./routes");
+const events = require("./routes/eventRoutes");
 
 const app = express();
 

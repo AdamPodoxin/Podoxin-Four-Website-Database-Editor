@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const Event = require("./EventSchema");
+const Event = require("../models/EventSchema");
 
 router.get("/", (req, res) => {
   Event.find().then((events) => {
