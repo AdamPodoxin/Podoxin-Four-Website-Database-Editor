@@ -107,17 +107,39 @@ io.on("connection", (socket) => {
       });
 
       response.on("end", () => {
-        const returnData =
-          strResponse == "[]"
-            ? null
-            : Array.from(JSON.parse(strResponse)).filter(
-                (data) => data.item == "numImgs"
-              )[0];
-
-        socket.emit("return numImgs", parseInt(returnData.numImgs));
+        const returnData = parseInt(strResponse);
+        socket.emit("return numImgs", returnData);
       });
     };
 
     http.request(options, callback).end();
+  });
+
+  socket.on("upload numImgs", (numImgs) => {
+    var postData = JSON.stringify({
+      numImgs,
+      item: "numImgs",
+    });
+
+    var options = {
+      hostname: "",
+      port: PORT,
+      path: "/api/numImgs",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    var req = http.request(options);
+
+    req.on("error", (e) => {
+      console.error(e);
+    });
+
+    req.write(postData);
+    req.end();
+
+    socket.emit("data sent successfully");
   });
 });
