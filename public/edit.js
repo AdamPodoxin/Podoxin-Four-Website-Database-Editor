@@ -13,7 +13,7 @@ socket.on("return events json", (res) => {
 });
 
 socket.on("return numImgs", (res) => {
-  console.log(res);
+  $("#num-imgs-input").val(res);
 });
 
 socket.on("data sent successfully", () => {
@@ -120,6 +120,15 @@ function loadEventsFromJSON(data) {
     );
   });
 }
+
+/*----------------------*/
+
+/*---Number of images---*/
+
+const updateNumImgs = () => {
+  const numImgs = parseInt($("#num-imgs-input").val());
+  socket.emit("upload numImgs", numImgs);
+};
 
 /*----------------------*/
 
