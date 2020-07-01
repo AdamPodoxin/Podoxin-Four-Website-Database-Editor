@@ -5,7 +5,7 @@ const NumImgs = require("../models/NumImgsSchema");
 
 router.get("/", (req, res) => {
   NumImgs.find().then((events) => {
-    res.json(events);
+    res.json(events[0].numImgs);
   });
 });
 
