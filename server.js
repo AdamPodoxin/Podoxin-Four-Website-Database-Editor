@@ -10,6 +10,7 @@ const cors = require("cors");
 const PORT = process.env.PORT || 5000;
 
 const events = require("./routes/eventRoutes");
+const numImgs = require("./routes/numImgsRoutes");
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use("/api/events", events);
+app.use("/api/numImgs", numImgs);
 
 let io = socketIO(server);
 
