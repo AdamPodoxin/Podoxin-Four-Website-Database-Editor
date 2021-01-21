@@ -11,7 +11,7 @@
     "https": "^1.0.0",
     "mongoose": "^5.9.20",
     "querystring": "^0.2.0",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.4.0"
   },
   "devDependencies": {},
   "scripts": {
