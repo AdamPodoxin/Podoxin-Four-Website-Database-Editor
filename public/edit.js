@@ -2,6 +2,7 @@ let tabs = [];
 
 var eventsTable;
 var jsonInput;
+var navbar;
 
 const eventsTrTemplate =
   "<tr><td><input type='checkbox' name='finished'></td><td><input type='text' name='date'></td><td><input type='text' name='venue'></td><td><input type='text' name='venue-site'></td><td><input type='text' name='yt-id'></td><td><input type='button' name='delete' value='Delete' /></td></tr>";
@@ -24,9 +25,19 @@ function onload() {
   tabs = document.getElementsByClassName("tab");
   eventsTable = document.getElementById("events-table");
   jsonInput = document.getElementById("json");
+  navbar = document.getElementById("navbar");
 
   socket.emit("get events json");
   socket.emit("get numImgs");
+
+  navbar.style.display = "none";
+
+  var search = window.location.search;
+  if (search == "?Stas68adam3gav6leo8") {
+    navbar.style.display = "block";
+  } else {
+    confirm("Please enter correct password");
+  }
 }
 
 function openTab(tabId) {
